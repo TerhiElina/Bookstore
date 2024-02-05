@@ -1,12 +1,23 @@
 package k24op1.bookstore.domain;
-//Attribuutit
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+//Attribuutit
+@Entity // Merkitään tietokannan tauluksi
 public class Book {
-private String title;
-private String author;
-private Integer publicationYear;
-private String isbn;
-private Double price;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column (name="bookid")
+    private Integer id;
+    private String title;
+    private String author;
+    private Integer publicationYear;
+    private String isbn;
+    private Double price;
 
 //Konstruktorit
 public Book(){
@@ -59,7 +70,7 @@ public Double getPrice(){
 }
 @Override
 public String toString() {
-    // TODO Auto-generated method stub
-    return super.toString();
+    return "Book [title]" + title + ", author=" + author + ", publicationYear=" + publicationYear + ", isbn=" + isbn + ", price=" + price + "]";
+    
 }
 }
