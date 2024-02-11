@@ -6,9 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 import java.util.ArrayList;
+import org.springframework.web.bind.annotation.RequestMethod;
+import k24op1.bookstore.domain.Book;
+
 
 
 
@@ -22,12 +26,36 @@ public class BookController {
         model.addAttribute("books", repository.findAll());
         return "booklist";
     }
-    
+    @RequestMapping(value = "/add")
+    public String addBook(Model model){
+        model.addAttribute("book", new Book());
+        return "addbook";
+    }
+
+    @RequestMapping(value = "/edit/{id}")
+    public String editBook(@PathVariable("id") Integer bookId, Model model){
+        Book book = repository.findById(bookId).orElse(null);
+        if (book == null) {
+            //This handles, if the book is null
+            return "redirect:/booklist";
+        }
+        model.addAttribute("book", book);
+        return "editbook";
     }
     
-    /*public String getBooks (Model model){
-        List<Book> books = new ArrayList<Book>();
-        model.addAttribute("books", books); 
-        return "index";    
-    }*/
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(Book book){
+        repository.save(book);
+        return "redirect:booklist";
+    }
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+        public String deleteBook(@PathVariable("id") Integer bookId, Model model){
+         repository.deleteById(bookId);
+         return "redirect:../booklist";   
+        }
+
+
+    }
+    
+
 

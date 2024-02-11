@@ -1,6 +1,5 @@
 package k24op1.bookstore.domain;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,7 +10,6 @@ import jakarta.persistence.Id;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column (name="bookid")
     private Integer id;
     private String title;
     private String author;
@@ -53,6 +51,9 @@ public void setPrice (Double price){
     this.price = price;
 }
 // Getterit
+public Integer getId() {
+    return id;
+}
 public String getTitle(){
     return title;
 }
