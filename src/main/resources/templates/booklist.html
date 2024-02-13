@@ -12,8 +12,9 @@
             <th>Title</th>
             <th>Author</th>
             <th>Publication year</th>
-            <th>isbn</th>
-            <th>price</th>
+            <th>Isbn</th>
+            <th>Price</th>
+            <th>Category</th>
         </tr>
         <tr th:each ="book : ${books}">
             <td th:text="${book.title}"></td>
@@ -21,6 +22,7 @@
             <td th:text="${book.publicationYear}"></td>
             <td th:text="${book.isbn}"></td>
             <td th:text="${book.price}"></td>
+            <td th:text="${book.category.name}"></td>
            <td><a th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-danger">Delete</a></td>
            <td><a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-primary">Edit</a></td>
         </tr>

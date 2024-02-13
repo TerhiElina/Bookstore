@@ -1,5 +1,6 @@
 package k24op1.bookstore.web;
 import k24op1.bookstore.domain.BookRepository;
+import k24op1.bookstore.domain.CategoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,10 @@ import k24op1.bookstore.domain.Book;
 public class BookController {
     @Autowired
     private BookRepository repository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
+    
     @RequestMapping(value={"/booklist"})
     public String bookList(Model model){
         model.addAttribute("books", repository.findAll());

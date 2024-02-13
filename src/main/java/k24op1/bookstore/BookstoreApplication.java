@@ -1,5 +1,9 @@
 package k24op1.bookstore;
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,24 +16,14 @@ import k24op1.bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
+	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
-
 	@Bean
-	public CommandLineRunner demo(BookRepository bookRepository){
-		return (args) ->{
-			Book book1 = new Book("Mikki Merihädässä", "Mikki Hiiri", 2001, "M1234", 20.50 );
-			Book book2 = new Book("Akun paketointivinkit", "Aku Ankka", 2009, "A1234", 25.50 );
-
-			//Saving the testdata to the repository
-			bookRepository.save(book1);
-			bookRepository.save(book2);
-		};
-	}
-	@Bean
-	public CommandLineRunner demoCategory(CategoryRepository categoryRepository){
+	public CommandLineRunner demoCategory(BookRepository bookRepository, CategoryRepository categoryRepository){
+	
 		return (args) ->{
 			Category category1 = new Category("Scifi" );
 			Category category2 = new Category("fantasy" );
@@ -45,6 +39,18 @@ public class BookstoreApplication {
         	System.out.println(category1);
         	System.out.println(category2);
         	System.out.println(category3);
+
+			bookRepository.save(new Book("Mikki Merihädässä", "Mikki Hiiri", 2001, "M1234", 20.50, category1));
+			bookRepository.save(new Book("Akun paketointivinkit", "Aku Ankka", 2009, "A1234", 25.50, category2 ));
+
+			log.info("fetch all books");
+			for (Book book : bookRepository.findAll()) {
+				log.info(book.toString());
+			}
 		};
 	}
+
 }
+	
+
+

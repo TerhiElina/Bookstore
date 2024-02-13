@@ -1,9 +1,14 @@
 package k24op1.bookstore.domain;
 
+//import org.hibernate.mapping.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Category {
@@ -13,6 +18,8 @@ public class Category {
     private Integer categoryid;
     private String name;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    private List<Book> books;
 public Category(){
    super();
    this.name = null;
@@ -34,8 +41,15 @@ public String getName(){
 public void setName(String name){
     this.name = name;
 }
+public List<Book> getBooks(){
+    return books;
+}
+public void setBooks(List<Book> books){
+    this.books = books;
+}
 @Override
 public String toString(){
+    //Tänne ei syötetä lista attribuuttia, muuten tulee infinitive loop
     return "Category [categoryid=" + categoryid + ", name=" + name + "]";
 }
 }
