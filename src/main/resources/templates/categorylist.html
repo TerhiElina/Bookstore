@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CategoryList</title>
+</head>
+<body>
+    <table class="table table-striped">
+        <tr>
+            <th>Categories</th>
+        </tr>
+       <tr th:each ="category : ${categories}">
+        <td th:text="${category.name}"></td>
+       </tr> 
+    </table>
+    <a href="/addcategory" class="btn btn-success">Add new category</a>
+    
+</body>
+</html>

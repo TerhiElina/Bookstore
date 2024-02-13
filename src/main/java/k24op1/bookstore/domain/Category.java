@@ -10,11 +10,12 @@ public class Category {
     //Luodaan id, jonka arvo generoidaan automaattisesti
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-private Integer categoryid;
-private String name;
+    private Integer categoryid;
+    private String name;
 
 public Category(){
-   
+   super();
+   this.name = null;
 }
 public Category(String name){
     super();
@@ -27,7 +28,7 @@ public Integer getCategoryid(){
 public void setCategoryid(Integer categoryid){
     this.categoryid = categoryid;
 }
-public String getName(String name){
+public String getName(){
    return name;
 }
 public void setName(String name){

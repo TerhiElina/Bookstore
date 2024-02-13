@@ -39,6 +39,12 @@ public class BookstoreApplication {
 			categoryRepository.save(category1);
 			categoryRepository.save(category2);
 			categoryRepository.save(category3);
+
+			//The following is logging the data,so I can see it in Terminal
+			System.out.println("Categories inserted:");
+        	System.out.println(category1);
+        	System.out.println(category2);
+        	System.out.println(category3);
 		};
 	}
 }
