@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class CategoryController {
  @Autowired
     private CategoryRepository repository;
+
     @RequestMapping(value={"/categorylist"})
     public String CategoryList(Model model){
         model.addAttribute("categories", repository.findAll());

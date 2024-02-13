@@ -21,7 +21,7 @@ public class BookController {
 
     @Autowired
     private CategoryRepository categoryRepository;
-    
+
     @RequestMapping(value={"/booklist"})
     public String bookList(Model model){
         model.addAttribute("books", repository.findAll());
@@ -30,6 +30,7 @@ public class BookController {
     @RequestMapping(value = "/add")
     public String addBook(Model model){
         model.addAttribute("book", new Book());
+        model.addAttribute("category", categoryRepository.findAll());
         return "addbook";
     }
 
