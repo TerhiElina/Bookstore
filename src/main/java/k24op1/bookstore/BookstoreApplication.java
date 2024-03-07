@@ -13,6 +13,8 @@ import k24op1.bookstore.domain.Book;
 import k24op1.bookstore.domain.BookRepository;
 import k24op1.bookstore.domain.Category;
 import k24op1.bookstore.domain.CategoryRepository;
+import k24op1.bookstore.domain.User;
+import k24op1.bookstore.domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -22,17 +24,26 @@ public class BookstoreApplication {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
 	@Bean
-	public CommandLineRunner demoCategory(BookRepository bookRepository, CategoryRepository categoryRepository){
+	public CommandLineRunner demoCategory(BookRepository bookRepository,
+	CategoryRepository categoryRepository,
+	UserRepository userRepository){
 	
 		return (args) ->{
 			Category category1 = new Category("Scifi" );
 			Category category2 = new Category("fantasy" );
 			Category category3 = new Category("Horror" );
 
+			User user1 = new User("user","$2a$10$HGRHBBrT98GO4iH1IFEOxeHbbbeOJKN.03ocsiyf1qOQyRl5fvhwC","u.u@umail.com","USER");
+			User user2 = new User("admin","$2a$10$uLc/N/QuVnRk0ss2lgut9uSDheNnSh2ztYPz8pCb60xHL3DY1Bjd.","a.a@amail.com","ADMIN");
+
+			
 			//Saving the testdata to the repository
 			categoryRepository.save(category1);
 			categoryRepository.save(category2);
 			categoryRepository.save(category3);
+
+			userRepository.save(user1);
+			userRepository.save(user2);
 
 			//The following is logging the data,so I can see it in Terminal
 			System.out.println("Categories inserted:");
