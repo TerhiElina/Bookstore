@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import k24op1.bookstore.domain.Book;
 
 import k24op1.bookstore.domain.BookRepository;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @Controller
@@ -27,5 +30,12 @@ public @ResponseBody List <Book> getBookRest()   {
 public @ResponseBody Optional <Book> getBookById(@PathVariable("id") Integer BookId){
 return repository.findById(BookId);
 }
+
+@PostMapping("/books")
+public @ResponseBody Book addBook(@RequestBody Book newBook){
+   return repository.save(newBook); 
+}
+
+
 
 }

@@ -3,6 +3,7 @@ import k24op1.bookstore.domain.BookRepository;
 import k24op1.bookstore.domain.CategoryRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,6 +52,7 @@ public class BookController {
         return "redirect:booklist";
     }
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+        @PreAuthorize("hasRole('ADMIN')")
         public String deleteBook(@PathVariable("id") Integer bookId, Model model){
          repository.deleteById(bookId);
          return "redirect:../booklist";   
